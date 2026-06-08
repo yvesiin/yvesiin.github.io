@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angel ✦</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cyan:#22d3ee; --violet:#c084fc; --pink:#f472b6;
+    --ink:#e8ecff; --muted:#9aa6cf;
+    --space-0:#070a1c; --space-1:#15123a; --space-2:#221046;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Pixelify Sans', ui-sans-serif, system-ui, sans-serif;
+    color:var(--ink);
+    background:var(--space-0);
+    min-height:100vh;
+    display:flex; justify-content:center;
+    padding:64px 20px 48px;
+    position:relative; overflow-x:hidden;
+  }
+
+  /* ---------- cosmic background ---------- */
+  .bg{position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(60% 45% at 65% 12%, rgba(236,72,153,.30), transparent 70%),
+      radial-gradient(45% 35% at 28% 22%, rgba(139,92,246,.28), transparent 70%),
+      radial-gradient(55% 45% at 32% 88%, rgba(34,211,238,.20), transparent 70%),
+      radial-gradient(40% 35% at 82% 86%, rgba(244,114,182,.18), transparent 70%),
+      linear-gradient(180deg, #0a0e22 0%, #15123a 28%, #221046 52%, #130d2e 76%, #070a1c 100%);
+  }
+  .stars{position:fixed; inset:0; z-index:-1; pointer-events:none;}
+  .star{position:absolute; width:2px; height:2px; border-radius:50%;
+    background:#dbeafe; animation:tw 3.5s ease-in-out infinite;}
+  @keyframes tw{0%,100%{opacity:.18} 50%{opacity:.9}}
+
+  .sparkle{position:fixed; z-index:-1; color:var(--pink);
+    filter:drop-shadow(0 0 6px currentColor); animation:float 7s ease-in-out infinite;}
+  .sparkle svg{display:block;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-12px) rotate(8deg)}}
+
+  /* shooting star */
+  .shoot{position:fixed; top:-10%; left:60%; width:2px; height:2px; z-index:-1;
+    background:#fff; border-radius:50%;
+    box-shadow:0 0 0 2px rgba(255,255,255,.3);
+    animation:shoot 9s linear infinite; opacity:0;}
+  .shoot::after{content:""; position:absolute; top:50%; right:0; width:120px; height:1px;
+    background:linear-gradient(90deg, transparent, #fff); transform:translateY(-50%);}
+  @keyframes shoot{0%{opacity:0; transform:translate(0,0) rotate(35deg)}
+    6%{opacity:1} 14%{opacity:0; transform:translate(-340px,260px) rotate(35deg)}
+    100%{opacity:0}}
+
+  /* ---------- card / content column ---------- */
+  .card{width:100%; max-width:440px; text-align:center; position:relative; z-index:1;}
+  .card > *{opacity:0; transform:translateY(14px); animation:rise .7s ease forwards;}
+  .card > *:nth-child(1){animation-delay:.05s}
+  .card > *:nth-child(2){animation-delay:.15s}
+  .card > *:nth-child(3){animation-delay:.25s}
+  .card > *:nth-child(4){animation-delay:.35s}
+  .card > *:nth-child(5){animation-delay:.45s}
+  .card > *:nth-child(6){animation-delay:.55s}
+  .card > *:nth-child(7){animation-delay:.65s}
+  @keyframes rise{to{opacity:1; transform:translateY(0)}}
+
+  .kicker{font-size:10px; letter-spacing:4px; text-transform:uppercase;
+    color:var(--cyan); opacity:.85; margin-bottom:6px;}
+
+  .name{font-family:'Pinyon Script', cursive; font-weight:400;
+    font-size:104px; line-height:.95; padding:0 6px 4px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet) 55%, var(--pink));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 0 18px rgba(192,132,252,.45));}
+
+  .tagline{font-size:16px; color:#c4b5fd; letter-spacing:.5px; margin-top:2px;}
+
+  .motto{font-size:12.5px; color:var(--muted); line-height:1.6;
+    max-width:330px; margin:18px auto 26px; font-style:italic;
+    padding:10px 0; border-top:1px solid rgba(148,166,207,.18);
+    border-bottom:1px solid rgba(148,166,207,.18);}
+
+  /* ---------- link buttons ---------- */
+  .links{display:flex; flex-direction:column; gap:11px; margin-bottom:30px;}
+  .btn{display:flex; align-items:center; justify-content:center; gap:8px;
+    text-decoration:none; color:var(--ink); font-size:15px; letter-spacing:.5px;
+    padding:13px 16px; border-radius:12px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(148,166,207,.25);
+    box-shadow:inset 0 0 0 0 rgba(34,211,238,0);
+    transition:transform .18s ease, border-color .18s ease, box-shadow .25s ease, background .25s ease;}
+  .btn:hover{transform:translateY(-3px);
+    border-color:var(--accent, var(--violet));
+    background:rgba(255,255,255,.07);
+    box-shadow:0 6px 26px -8px var(--accent, var(--violet)), 0 0 18px -6px var(--accent, var(--violet));}
+  .btn .ic{font-size:16px;}
+  .btn.gh{--accent:var(--cyan)} .btn.pf{--accent:var(--violet)}
+  .btn.tw{--accent:var(--cyan)} .btn.dc{--accent:var(--violet)} .btn.em{--accent:var(--pink)}
+
+  /* ---------- projects ---------- */
+  .section-title{font-size:12px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--pink); margin:0 0 14px;}
+  .projects{display:flex; flex-direction:column; gap:11px; margin-bottom:28px;}
+  .project{text-align:left; padding:14px 16px; border-radius:12px;
+    background:rgba(255,255,255,.035); border:1px solid rgba(148,166,207,.2);
+    transition:transform .18s ease, border-color .18s ease;}
+  .project:hover{transform:translateY(-3px); border-color:var(--violet);}
+  .project h3{font-size:15px; color:#fff; margin-bottom:3px;}
+  .project p{font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:8px;}
+  .project a{font-size:12px; letter-spacing:.5px; color:var(--cyan); text-decoration:none;}
+  .project a:hover{color:var(--pink);}
+
+  .tech{font-size:12px; letter-spacing:2px; color:var(--muted); margin-bottom:30px;}
+  .tech span{color:var(--violet); margin:0 4px;}
+
+  footer{font-size:11px; letter-spacing:3px; color:var(--muted); opacity:.8;}
+
+  @media(max-width:420px){ .name{font-size:84px} }
+  @media(prefers-reduced-motion:reduce){ *{animation:none !important} .card>*{opacity:1; transform:none} }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="stars" id="stars"></div>
+  <div class="shoot"></div>
+
+  <!-- floating sparkles -->
+  <div class="sparkle" style="top:14%; left:12%; color:#67e8f9; animation-delay:0s">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.2 9.8L24 12l-9.8 2.2L12 24l-2.2-9.8L0 12l9.8-2.2z"/></svg></div>
+  <div class="sparkle" style="top:20%; right:10%; color:#f472b6; animation-delay:1.4s">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.2 9.8L24 12l-9.8 2.2L12 24l-2.2-9.8L0 12l9.8-2.2z"/></svg></div>
+  <div class="sparkle" style="bottom:16%; left:16%; color:#f0abfc; animation-delay:2.6s">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.2 9.8L24 12l-9.8 2.2L12 24l-2.2-9.8L0 12l9.8-2.2z"/></svg></div>
+  <div class="sparkle" style="bottom:22%; right:14%; color:#67e8f9; animation-delay:3.8s">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2.2 9.8L24 12l-9.8 2.2L12 24l-2.2-9.8L0 12l9.8-2.2z"/></svg></div>
+
+  <main class="card">
+    <!-- HERO -->
+    <div>
+      <div class="kicker">✦ welcome to my corner of the universe ✦</div>
+      <h1 class="name">Angel</h1>
+      <p class="tagline">developer &amp; cosmic tinkerer ✦</p>
+    </div>
+
+    <!-- MOTTO -->
+    <p class="motto">"Some people read the stars. I write them — one line at a time."</p>
+
+    <!-- LINKS  (edit href="" with your real URLs) -->
+    <nav class="links">
+      <a class="btn gh" href="https://github.com/yvesiin"><span class="ic">✦</span> GitHub</a>
+      <a class="btn pf" href="#projects"><span class="ic">🪐</span> Projects</a>
+      <a class="btn tw" href="#"><span class="ic">💫</span> Twitter / X</a>
+      <a class="btn dc" href="#"><span class="ic">🎧</span> Discord</a>
+      <a class="btn em" href="mailto:you@example.com"><span class="ic">📫</span> Email</a>
+    </nav>
+
+    <!-- PROJECTS  (swap titles, text, and links) -->
+    <section id="projects">
+      <h2 class="section-title">✧ Featured Projects</h2>
+      <div class="projects">
+        <div class="project">
+          <h3>Project One</h3>
+          <p>One line about what it is or what you built.</p>
+          <a href="#">→ view</a>
+        </div>
+        <div class="project">
+          <h3>Project Two</h3>
+          <p>One line about what it does.</p>
+          <a href="#">→ view</a>
+        </div>
+        <div class="project">
+          <h3>Project Three</h3>
+          <p>One line about what it does.</p>
+          <a href="#">→ view</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH -->
+    <div class="tech">Python <span>·</span> JavaScript <span>·</span> React <span>·</span> Git</div>
+
+    <!-- FOOTER -->
+    <footer>✦ ✧ ✦ &nbsp; thanks for drifting by &nbsp; ✦ ✧ ✦</footer>
+  </main>
+
+  <script>
+    // scatter twinkling stars, sparser through the vertical center
+    const wrap = document.getElementById('stars');
+    const N = 130;
+    for (let i = 0; i < N; i++){
+      const yp = Math.random()*100;
+      if (yp > 32 && yp < 70 && Math.random() < 0.6) continue; // keep center calmer
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random()*1.6 + 0.6;
+      s.style.left = Math.random()*100 + '%';
+      s.style.top = yp + '%';
+      s.style.width = s.style.height = size.toFixed(1) + 'px';
+      s.style.opacity = (Math.random()*0.6 + 0.2).toFixed(2);
+      s.style.animationDelay = (Math.random()*4).toFixed(2) + 's';
+      wrap.appendChild(s);
+    }
+  </script>
+</body>
+</html>
